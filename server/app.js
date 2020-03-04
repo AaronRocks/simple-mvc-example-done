@@ -7,7 +7,7 @@ const express = require('express');
 const compression = require('compression');
 // favicon library to handle favicon requests
 const favicon = require('serve-favicon');
- // Library to parse cookies from the requests
+// Library to parse cookies from the requests
 const cookieParser = require('cookie-parser');
 // library to handle POST requests any information sent in an HTTP body
 const bodyParser = require('body-parser');
@@ -67,7 +67,9 @@ app.use(bodyParser.json());
 // app.set sets one of the express config options
 // set up the view (V of MVC) to use handlebars
 // You can use other view engines besides handlebars
-app.engine('handlebars', expressHandlebars());
+app.engine('handlebars', expressHandlebars({
+  defaultLayout: '',
+}));
 app.set('view engine', 'handlebars');
 
 // set the views path to the template directory
@@ -85,10 +87,9 @@ router(app);
 
 // Tell the app to listen on the specified port
 app.listen(port, (err) => {
-    // if the app fails, throw the err
+  // if the app fails, throw the err
   if (err) {
     throw err;
   }
   console.log(`Listening on port ${port}`);
 });
-
